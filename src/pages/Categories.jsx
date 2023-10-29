@@ -18,7 +18,7 @@ const Categories = () => {
         fetchData();
     }, []);
 
-    const filteredCategories = categories.filter((category) =>
+    const filteredCategories = Object.values(categories).filter((category) =>
         category.category_name.toLowerCase().includes(searchTerm.toLowerCase())
     );
 

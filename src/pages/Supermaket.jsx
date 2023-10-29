@@ -18,7 +18,7 @@ const Supermarket = () => {
         fetchData();
     }, []);
 
-    const filteredSupermarkets = Object.values(supermarkets).filter((supermarket) =>
+    const filteredSupermarkets = supermarkets.filter((supermarket) =>
         supermarket.name.toLowerCase().includes(searchTerm.toLowerCase())
     );
 

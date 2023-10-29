@@ -83,7 +83,7 @@ const SingleProduct = () => {
       try {
         // Obtain comments
         const res = await axios.get(`/comments/`);
-        const filteredComments = Object.values(res.data).filter((comment) => comment.idproduct == postId);
+        const filteredComments = res.data.filter((comment) => comment.idproduct == postId);
         setComments(filteredComments);
 
         // Obtain users who wrote the comments
@@ -104,13 +104,13 @@ const SingleProduct = () => {
         try {
           // Get stock
           const res1 = await axios.get(`/stock/`);
-          const filteredStock = Object.values(res1.data).filter((stock) => stock.idproduct == postId);
+          const filteredStock = res1.data.filter((stock) => stock.idproduct == postId);
           setStock(filteredStock);
 
           // Get supermarkets
           const myid = stock[0].idsupermarket
           const res2 = await axios.get(`/markets/`);
-          const filteredMarkets = Object.values(res2.data).filter((markets) => markets.id == myid);
+          const filteredMarkets = res2.data.filter((markets) => markets.id == myid);
           setMarkets(filteredMarkets[0]);
         } catch (err) {
           console.log(err);
@@ -118,12 +118,12 @@ const SingleProduct = () => {
 
         // Obtain productallergies and allergies
         const res3 = await axios.get(`/productallergies/`);
-        const filteredProductallergies = Object.values(res3.data).filter((productallergies) => productallergies.idproduct == postId);
+        const filteredProductallergies = res3.data.filter((productallergies) => productallergies.idproduct == postId);
 
         // Obtain the IDs of the allergies
         const allergyIds = filteredProductallergies.map((productallergy) => productallergy.idallergies);
         const res4 = await axios.get(`/allergies/`);
-        const filteredAllergies = Object.values(res4.data).filter((allergy) => allergyIds.includes(allergy.id));
+        const filteredAllergies = res4.data.filter((allergy) => allergyIds.includes(allergy.id));
         setAllergies(filteredAllergies);
 
         const res5 = await axios.get(`/products/${postId}`);
